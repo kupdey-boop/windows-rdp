@@ -22,3 +22,6 @@ jobs:
       - name: Show connection info
         run: |
           echo "RDP Enabled. Use IP from above and username 'github'."
+                - name: Open RDP Port
+        run: |
+          powershell -Command "New-NetFirewallRule -DisplayName 'Allow RDP Port' -Direction Inbound -Protocol TCP -LocalPort 3389 -Action Allow"
