@@ -15,6 +15,10 @@ jobs:
           powershell -Command "net localgroup administrators github /add"
           powershell -Command "net user github $env:USER_PASSWORD"
 
+      - name: Show External IP
+        run: |
+          curl ifconfig.me
+
       - name: Show connection info
         run: |
-          echo "RDP Enabled. Use IP and username 'github'."
+          echo "RDP Enabled. Use IP from above and username 'github'."
