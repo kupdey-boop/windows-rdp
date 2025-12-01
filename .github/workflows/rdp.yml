@@ -15,13 +15,18 @@ jobs:
           powershell -Command "net localgroup administrators github /add"
           powershell -Command "net user github $env:USER_PASSWORD"
 
+      - name: Open RDP Port
+        run: |
+          powershell -Command "New-NetFirewallRule -DisplayName 'Allow RDP Port' -Direction Inbound -Protocol TCP -LocalPort 3389 -Action Allow"
+
       - name: Show External IP
         run: |
           curl ifconfig.me
 
       - name: Show connection info
         run: |
-          echo "RDP Enabled. Use IP from above and username 'github'."
-                - name: Open RDP Port
-        run: |
-          powershell -Command "New-NetFirewallRule -DisplayName 'Allow RDP Port' -Direction Inbound -Protocol TCP -LocalPort 3389 -Action Allow"
+          echo "✅ RDP Enabled!"
+          echo "🖥️ IP Address: (Check above)"
+          echo "👤 Username: github"
+          echo "🔑 Password: (Your GitHub Secret USER_PASSWORD)"
+          echo "⏳ VM will auto-expire in ~6 hours"
